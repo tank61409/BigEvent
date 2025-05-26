@@ -6,9 +6,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.demo.demo.Mapper.CategoryDao;
 import com.demo.demo.Model.Category;
+import com.demo.demo.Model.Result;
 import com.demo.demo.helper.ThreadHelper;
 
 @Service
@@ -29,4 +31,16 @@ public class CategoryService {
         Map<String,Object> cache = ThreadHelper.get();
         return categoryDao.queryList(cache.get("id").toString());
     }
+
+    public Result<Category> getDetail(int id) {
+        return Result.success(categoryDao.findById(id));
+    }
+
+    public void updateCategory(Category category) {
+        category.setUpdateTime(LocalDateTime.now());
+        categoryDao.updateCategory(category);
+    }
+
+    
+
 }
