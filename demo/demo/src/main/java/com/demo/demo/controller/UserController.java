@@ -32,6 +32,7 @@ public class UserController {
 
     @PostMapping("/login")
     public Result<String> login(@RequestBody User user) {
+        System.out.println("登入controller");
         return userService.login(user);
     }
 
