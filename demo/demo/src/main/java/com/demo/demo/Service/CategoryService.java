@@ -42,6 +42,8 @@ public class CategoryService {
     }
 
     public void deletCategory(Ids ids) {
+        Map<String,Object> cache = ThreadHelper.get();
+        ids.setUserId(cache.get("id").toString());
         for (String id : ids.getDeleteIds()) {
             categoryDao.deletCategory(id,ids.getUserId());
         }
