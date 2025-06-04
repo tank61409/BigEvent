@@ -1,10 +1,11 @@
 import { message, Space, Table } from 'antd';
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
-import AddCategoryModal from '../components/AddCategoryModal';
+import AddCategoryModal, { CategoryForm } from '../components/AddCategoryModal';
 import http from '../utils/axiosUtils';
 import { DeleteOutlined } from '@ant-design/icons';
 import DeleteModal from '../components/DeleteModal';
+import { title } from 'process';
 
 
 function Category() {
@@ -20,17 +21,27 @@ function Category() {
   const [selectMode, setSelectMode] = useState(false);
   const [selectKeys, setSelectKeys] = useState<React.Key[]>([]);
   const [deleteModal, setdeleteModal] = useState(false)
+  //編輯
+  const [currentRecord, setCurrentRecord] = useState<CategoryForm | undefined>()
+
+
 
   const fetchCategory = async () => {
     const respone = await http.get('/category', {})
+    console.log(respone.data.data)
     setCategory(respone.data.data)
   }
 
-  const handleAdd = async (value: { categoryName: string; categoryAlias: string }) => {
+  const handleAdd = async (value: CategoryForm) => {
     setModalLoading(true)
     try {
-      await http.post('/category/addcategory', value)
-      message.success('新增成功')
+      if (value.id) {
+        await http.put('/category/updatecategory', value)
+        message.success("編輯成功")
+      } else {
+        await http.post('/category/addcategory', value)
+        message.success('新增成功')
+      }
       setOpen(false)
       fetchCategory()
     } catch {
@@ -50,6 +61,11 @@ function Category() {
       toggleSelectMode()
       setdeleteModal(false)
     }
+  }
+
+  const openEdit = (record: CategoryForm) => {
+    setCurrentRecord(record)
+    setOpen(true)
   }
 
   const toggleSelectMode = () => {
@@ -83,20 +99,27 @@ function Category() {
       title: '更新時間',
       dataIndex: 'updateTime',
       key: 'updateTime'
+    },
+    {
+      title: '操作',
+      key: 'action',
+      render: (_: any, record: CategoryForm) => {
+        return (<Button onClick={(e) => { e.stopPropagation(); openEdit(record) }}>編輯</Button>)
+      }
     }
   ];
 
   return (
     <div>
       <Space>
-        <Button type='primary' onClick={() => setOpen(true)} style={{ marginBottom: 16 }}>新增分類</Button>
+        <Button type='primary' onClick={() => {setOpen(true);setCurrentRecord(undefined)}} style={{ marginBottom: 16 }}>新增分類</Button>
         <Button type='default' onClick={toggleSelectMode} style={{ marginBottom: 16 }} >{selectMode ? "取消選取" : "選取"}</Button>
-        <Button type='default' onClick={()=>setdeleteModal(true)} disabled={selectKeys.length === 0} style={{ marginBottom: 16 }} icon={<DeleteOutlined />} danger> 刪除</Button>
+        <Button type='default' onClick={() => setdeleteModal(true)} disabled={selectKeys.length === 0} style={{ marginBottom: 16 }} icon={<DeleteOutlined />} danger> 刪除</Button>
       </Space>
 
       <Table rowKey="id" dataSource={category} columns={columns} pagination={{ position: ['bottomCenter'] }} rowSelection={rowSelection} />
       <DeleteModal open={deleteModal} selectCount={selectKeys.length} onDelete={handleDelete} onCancel={() => setdeleteModal(false)}></DeleteModal>
-      <AddCategoryModal open={open} loading={modalLoading} onOk={handleAdd} onCancel={() => setOpen(false)} />
+      <AddCategoryModal open={open} loading={modalLoading} record={currentRecord} onOk={handleAdd} onCancel={() => setOpen(false)} />
     </div>
 
   )

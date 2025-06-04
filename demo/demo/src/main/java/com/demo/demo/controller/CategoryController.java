@@ -42,7 +42,7 @@ public class CategoryController {
         return categoryService.getDetail(id);
     }
 
-    @PutMapping
+    @PutMapping("/updatecategory")
     public Result updateCategory(@RequestBody @Validated Category category) {
         categoryService.updateCategory(category);
         return Result.success();
