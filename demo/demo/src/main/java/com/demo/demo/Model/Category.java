@@ -10,7 +10,6 @@ import lombok.Data;
 
 @Data
 public class Category {
-    @NotNull
     private Integer id;
     @NotEmpty
     private String categoryName;

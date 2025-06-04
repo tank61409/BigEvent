@@ -1,19 +1,37 @@
-import { Table } from 'antd';
-import axios from 'axios';
+import { message, Table } from 'antd';
+import { Button } from 'antd/es/radio';
 import { useEffect, useState } from 'react';
+import AddCategoryModal from '../components/AddCategoryModal';
 import http from '../utils/axiosUtils';
 
 
 
 function Category() {
-  const [category, setCategory] = useState([]);
-  useEffect(() => {
-    const fetchCategory = async () => {
-      const respone = await http.get('http://localhost:8080/category', {})
-      setCategory(respone.data.data)
+  const fetchCategory = async () => {
+    const respone = await http.get('/category', {})
+    console.log(respone.data.data)
+    setCategory(respone.data.data)
+  }
+  const handAdd = async (value: { categoryName: string; categoryAlias: string }) => {
+    setModalLoading(true)
+    try {
+      await http.post('/category/addcategory', value)
+      message.success('新增成功')
+      setOpen(false)
+      fetchCategory()
+    } catch {
+      message.error("新增失敗")
+    } finally {
+      setModalLoading(false)
     }
+  }
+  const [category, setCategory] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [modalLoading, setModalLoading] = useState(false);
+  useEffect(() => {
     fetchCategory()
-  },[])
+  }, [])
 
   const columns = [
     {
@@ -40,7 +58,9 @@ function Category() {
 
   return (
     <div>
-      <Table dataSource={category} columns={columns} pagination={{ position: ['bottomCenter'] }} />
+      <Button type='primary' onClick={() => setOpen(true)} style={{ marginBottom: 16 }}>新增分類</Button>
+      <Table rowKey="id" dataSource={category} columns={columns} pagination={{ position: ['bottomCenter'] }} />
+      <AddCategoryModal open={open} loading={loading} onOk={handAdd} onCancel={() => setOpen(false)} />
     </div>
 
   )

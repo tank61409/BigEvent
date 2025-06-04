@@ -6,10 +6,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.demo.demo.Mapper.CategoryDao;
 import com.demo.demo.Model.Category;
+import com.demo.demo.Model.Ids;
 import com.demo.demo.Model.Result;
 import com.demo.demo.helper.ThreadHelper;
 
@@ -39,6 +39,14 @@ public class CategoryService {
     public void updateCategory(Category category) {
         category.setUpdateTime(LocalDateTime.now());
         categoryDao.updateCategory(category);
+    }
+
+    public void deletCategory(Ids ids) {
+        for (String id : ids.getDeleteIds()) {
+            categoryDao.deletCategory(id,ids.getUserId());
+        }
+        
+        
     }
 
     

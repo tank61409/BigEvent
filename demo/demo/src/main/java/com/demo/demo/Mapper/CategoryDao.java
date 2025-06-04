@@ -2,12 +2,14 @@ package com.demo.demo.Mapper;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.demo.demo.Model.Category;
+import com.demo.demo.Model.Ids;
 
 @Mapper
 public interface CategoryDao {
@@ -24,5 +26,8 @@ public interface CategoryDao {
 
     @Update("update category set category_name=#{categoryName},category_Alias=#{categoryAlias},update_time=#{updateTime} where id = #{id}")
     void updateCategory(Category category);
+
+    @Delete("Delete from category where id=#{id} and create_user=#{userId}")
+    void deletCategory(String id,String userId);
 
 }
