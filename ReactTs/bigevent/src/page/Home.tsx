@@ -1,75 +1,59 @@
-import React, { useState } from 'react';
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Button, Card, Col, Layout, Row, Space, theme, Typography } from 'antd';
+import React from 'react';
 import MyHeader from '../components/MyHeader';
-import { useNavigate } from 'react-router-dom';
-
-const { Header, Content, Footer, Sider } = Layout;
-
-type MenuItem = Required<MenuProps>['items'][number];
-
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
-}
-
-const items: MenuItem[] = [
-  getItem('Home', '/', <PieChartOutlined />),
-  getItem('Category', '/category', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
-];
+import MySider from '../components/MySider';
 
 const Home: React.FC = () => {
-  const navigate = useNavigate()
-  const [collapsed, setCollapsed] = useState(false);
+  const { Content, Sider } = Layout;
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={({ key }) => {
-          navigate(key)
-        }} />
-      </Sider>
+      <MySider />
       <Layout>
-        <MyHeader />
         <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }} items={[{ title: 'User' }, { title: 'Bill' }]} />
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            Bill is a cat.
-          </div>
+          <Typography.Title level={2} style={{ marginBottom: 24, color: '#2c2c2c' }}>Welcome,Admin!</Typography.Title>
+          <Row gutter={16}>
+            <Col span={15}>
+              <Card title={<span style={{ fontSize: '22px', fontWeight: 'bold' }}>Dashboard</span>} variant='borderless' >
+                <Row gutter={[16, 16]} align='stretch'  >
+                  <Col span={12}>
+                    <Card style={{ border: '1px solid #d9d9d9', height: 60 }} bodyStyle={{ padding: '4px 8px' }}>
+                      <div style={{ fontSize: 18 }} >Total User</div>
+                      <div style={{ fontSize: 18 }}>5</div>
+                    </Card>
+                  </Col>
+                  <Col span={12}>
+                    <Card style={{ border: '1px solid #d9d9d9', height: 60 }} bodyStyle={{ padding: '4px 8px' }}>
+                      <div style={{ fontSize: 18 }} >Total Category</div>
+                      <div style={{ fontSize: 18 }}>3</div>
+                    </Card>
+                  </Col>
+                  <Col span={24}>
+                    <Card style={{ border: '1px solid #d9d9d9', height: 60, width: '100%' }} bodyStyle={{ padding: '4px 8px' }}>
+                      <div style={{ fontSize: 18 }} >Total Category</div>
+                      <div style={{ fontSize: 18 }}>3</div>
+                    </Card>
+                  </Col>
+                </Row>
+
+
+              </Card>
+            </Col>
+
+            <Col span={9}>
+              <Card title={<span style={{ fontSize: '22px', fontWeight: 'bold' }}>Quick Action</span>} variant='borderless' style={{ width: '100%', height: 239 }}>
+                <Space direction='vertical' style={{ width: '100%' }} >
+                  <Button style={{ gap: '16px', fontSize: '16px', height: 40 }} block>Add User</Button>
+                  <Button style={{ gap: '16px', fontSize: '16px', height: 40 }} block>ManageCategories</Button>
+                  <Button style={{ gap: '16px', fontSize: '16px', height: 40 }} block>View Item</Button>
+                </Space>
+              </Card>
+            </Col>
+          </Row>
+
         </Content>
       </Layout>
     </Layout>

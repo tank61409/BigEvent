@@ -19,7 +19,7 @@ function MyHeader() {
         }
     }
     return (
-        <Header style={{display:'flex', padding: 0, background: colorBgContainer, justifyContent:"flex-end",alignItems:'center' }}>
+        <Header style={{    display:'flex', padding: 0, background: colorBgContainer, justifyContent:"flex-end",alignItems:'center' }}>
             <Button type={token?'default':"primary"} onClick={handleClick}>{token?'登出':'登入'}</Button>
         </Header>
     )

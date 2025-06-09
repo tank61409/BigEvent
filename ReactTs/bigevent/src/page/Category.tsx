@@ -1,11 +1,9 @@
-import { message, Space, Table } from 'antd';
-import { Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
+import { Button, message, Space, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import AddCategoryModal, { CategoryForm } from '../components/AddCategoryModal';
-import http from '../utils/axiosUtils';
-import { DeleteOutlined } from '@ant-design/icons';
 import DeleteModal from '../components/DeleteModal';
-import { title } from 'process';
+import http from '../utils/axiosUtils';
 
 
 function Category() {
