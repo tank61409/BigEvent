@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./page/Login";
 import Category from "./page/Category";
 import RequireAuth from "./components/RequireAuth";
@@ -8,6 +8,7 @@ import MyLayout from "./components/MyLayout";
 const RouteerConfig = () => {
     return (
         <Routes>
+            <Route path="/" element={<Navigate to='/home' replace/>} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             {/* 巢狀驗證 */}
