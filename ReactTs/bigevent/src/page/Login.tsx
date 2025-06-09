@@ -17,7 +17,8 @@ function Login() {
   const navigate = useNavigate();
   const onFinish = async (value: userLogin) => {
     setDisabled(true)
-    const respone = await axios.post('http://bigevent-production.up.railway.app/user/login', value)
+    // const respone = await axios.post('http://bigevent-production.up.railway.app/user/login', value)
+    const respone = await axios.post('http://localhost:8080/user/login', value)
     localStorage.setItem('token', respone.data.data)
     if (respone.data.code !== 1) {
       setErrorMsg("帳號或密碼次錯誤")

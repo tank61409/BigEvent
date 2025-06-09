@@ -1,6 +1,7 @@
 import axios from "axios";
 const http = axios.create({
-    baseURL:'http://bigevent-production.up.railway.app/',
+    // baseURL:'http://bigevent-production.up.railway.app/',
+    baseURL:'http://localhost:8080/',
     timeout:5000
 })
 
