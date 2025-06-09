@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer{
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-        .allowedOrigins("http://localhost:3000")
+        .allowedOrigins("https://big-event-seven.vercel.app/")
         .allowedMethods("GET","PUT","POST","PATCH","OPTIONS","DELETE")
         .allowedHeaders("*")
         .exposedHeaders("*")
