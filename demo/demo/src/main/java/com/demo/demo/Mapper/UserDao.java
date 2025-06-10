@@ -23,4 +23,7 @@ public interface UserDao {
 
     @Update("update `user` set password = #{newPwd},update_time=now() where id= #{id}")
     public void updatePwd(String newPwd,Integer id);
+
+    @Select("select count(id) from `user`")
+    public String getUserCount();
 }
