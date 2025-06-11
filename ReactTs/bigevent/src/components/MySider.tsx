@@ -28,7 +28,7 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem('Home', '/', <HomeOutlined />),
-  getItem('Category', '/category', <DatabaseOutlined />),
+  getItem('Table', '/category', <DatabaseOutlined />),
   getItem('User', 'sub1', <UserOutlined />, [
     getItem('Tom', '3'),
     getItem('Bill', '4'),

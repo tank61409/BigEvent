@@ -52,8 +52,5 @@ public class UserController {
         
         return userService.updatePwd(params);
     }
-    @GetMapping("getusercount")
-    public Result getUserCount(){
-        return userService.getUserCount();
-    }
+
 }

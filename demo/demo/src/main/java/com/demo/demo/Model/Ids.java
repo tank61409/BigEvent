@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 public class Ids {
-    private List<String> deleteIds;
+    private List<String> ids;
     private String userId;
 }

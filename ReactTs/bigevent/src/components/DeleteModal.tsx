@@ -3,20 +3,22 @@ import { Modal } from "antd";
 interface DeleteBarPops {
     open: boolean;
     selectCount: number;
-    onDelete: () => void;
+    loading: boolean;
+    onOk: () => void;
     onCancel: () => void;
+
 }
 
 function DeleteModal(props: DeleteBarPops) {
-    const { open, selectCount, onDelete, onCancel } = props
-    const handleDelete = () => {
-        Modal.confirm({
-            title: `確認刪除${props.selectCount}筆資料?`,
-            okText: '刪除',
-            cancelText: '取消',
-            onOk: () => props.onDelete()
-        })
-    }
+    const { open, selectCount, onOk, onCancel, loading } = props
+
+    Modal.confirm({
+        title: `確認刪除${props.selectCount}筆資料?`,
+        okText: '刪除',
+        cancelText: '取消',
+        onOk: () => props.onOk()
+    })
+
 
     return (
         <Modal open={open}
@@ -24,11 +26,12 @@ function DeleteModal(props: DeleteBarPops) {
             okText='刪除'
             cancelText='取消'
             okType='danger'
-            onOk={onDelete}
+            onOk={onOk}
             onCancel={onCancel}
-            destroyOnHidden>
-                刪除後資料無法復原，是否刪除?
-            </Modal>
+            destroyOnHidden
+            loading={loading}>
+            刪除後資料無法復原，是否刪除?
+        </Modal>
     )
 }
 export default DeleteModal;

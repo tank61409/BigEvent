@@ -96,7 +96,4 @@ public class UserService {
         return str == null || str.trim().isEmpty();
     }
 
-    public Result getUserCount() {
-       return Result.success(userDao.getUserCount());
-    }
 }

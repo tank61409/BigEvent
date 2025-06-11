@@ -1,5 +1,5 @@
 import { DeleteOutlined } from '@ant-design/icons';
-import { Button, message, Space, Table } from 'antd';
+import { Button, message, Select, Space, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import AddCategoryModal, { CategoryForm } from '../components/AddCategoryModal';
 import DeleteModal from '../components/DeleteModal';
@@ -18,15 +18,19 @@ function Category() {
   //刪除
   const [selectMode, setSelectMode] = useState(false);
   const [selectKeys, setSelectKeys] = useState<React.Key[]>([]);
-  const [deleteModal, setdeleteModal] = useState(false)
+  const [deleteModal, setdeleteModal] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   //編輯
-  const [currentRecord, setCurrentRecord] = useState<CategoryForm | undefined>()
+  const [currentRecord, setCurrentRecord] = useState<CategoryForm | undefined>();
 
-
+  const selectOptions =
+    [{ value: 'user', label: 'User' },
+    { value: 'category', label: 'Category' },
+    { value: 'article', label: 'Article' }
+    ];
 
   const fetchCategory = async () => {
     const respone = await http.get('/category', {})
-    console.log(respone.data.data)
     setCategory(respone.data.data)
   }
 
@@ -51,13 +55,16 @@ function Category() {
 
   const handleDelete = async () => {
     try {
-      await http.delete('/category/deletcategory', { data: { deleteIds: selectKeys } })
+      setDeleteLoading(true)
+      await http.delete('/category/deletcategory', { data: { ids: selectKeys, userID: null } })
+
     } catch {
       message.error("刪除失敗")
     } finally {
       fetchCategory()
       toggleSelectMode()
       setdeleteModal(false)
+      setDeleteLoading(false)
     }
   }
 
@@ -110,18 +117,18 @@ function Category() {
   return (
     <div>
       <Space>
-        <Button type='primary' onClick={() => {setOpen(true);setCurrentRecord(undefined)}} style={{ marginBottom: 16 }}>新增分類</Button>
+        <Select defaultValue='category' options={selectOptions} style={{ width: 100, marginBottom: 16 }} />
+        <Button type='primary' onClick={() => { setOpen(true); setCurrentRecord(undefined) }} style={{ marginBottom: 16 }}>新增分類</Button>
         <Button type='default' onClick={toggleSelectMode} style={{ marginBottom: 16 }} >{selectMode ? "取消選取" : "選取"}</Button>
         <Button type='default' onClick={() => setdeleteModal(true)} disabled={selectKeys.length === 0} style={{ marginBottom: 16 }} icon={<DeleteOutlined />} danger> 刪除</Button>
       </Space>
 
       <Table rowKey="id" dataSource={category} columns={columns} pagination={{ position: ['bottomCenter'] }} rowSelection={rowSelection} />
-      <DeleteModal open={deleteModal} selectCount={selectKeys.length} onDelete={handleDelete} onCancel={() => setdeleteModal(false)}></DeleteModal>
+      <DeleteModal open={deleteModal} selectCount={selectKeys.length} onOk={handleDelete} onCancel={() => setdeleteModal(false)} loading={deleteLoading} />
       <AddCategoryModal open={open} loading={modalLoading} record={currentRecord} onOk={handleAdd} onCancel={() => setOpen(false)} />
     </div>
 
   )
-
 }
 
 export default Category;

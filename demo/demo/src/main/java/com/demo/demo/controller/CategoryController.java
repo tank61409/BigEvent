@@ -49,8 +49,8 @@ public class CategoryController {
     }
 
     @DeleteMapping("/deletcategory")
-    public Result deletCategory(@RequestBody Ids id) {
-        categoryService.deletCategory(id);
+    public Result deletCategory(@RequestBody Ids ids) {
+        categoryService.deletCategory(ids);
         return Result.success();
     }
 }
