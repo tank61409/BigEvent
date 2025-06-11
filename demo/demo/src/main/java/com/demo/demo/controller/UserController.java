@@ -52,5 +52,8 @@ public class UserController {
         
         return userService.updatePwd(params);
     }
-
+    @GetMapping("/alluserinfo")
+    public Result getAllUserInfo(){
+        return userService.getAllUserInfo();
+    }
 }

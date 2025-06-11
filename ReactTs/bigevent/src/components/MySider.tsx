@@ -28,13 +28,8 @@ function getItem(
 
 const items: MenuItem[] = [
   getItem('Home', '/', <HomeOutlined />),
-  getItem('Table', '/category', <DatabaseOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
+  getItem('Category', '/category', <DatabaseOutlined />),
+  getItem('User', '/user', <UserOutlined />  ),
   getItem('Setting', '9 ', <SettingOutlined />),
 ];
 

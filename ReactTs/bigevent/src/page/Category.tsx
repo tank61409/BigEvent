@@ -11,7 +11,7 @@ function Category() {
     fetchCategory()
   }, [])
   //讀取
-  const [category, setCategory] = useState([]);
+  const [dataSource, setDataSource] = useState([]);
   //新增
   const [open, setOpen] = useState(false);
   const [modalLoading, setModalLoading] = useState(false);
@@ -22,6 +22,7 @@ function Category() {
   const [deleteLoading, setDeleteLoading] = useState(false);
   //編輯
   const [currentRecord, setCurrentRecord] = useState<CategoryForm | undefined>();
+  //切換表
 
   const selectOptions =
     [{ value: 'user', label: 'User' },
@@ -29,9 +30,10 @@ function Category() {
     { value: 'article', label: 'Article' }
     ];
 
+
   const fetchCategory = async () => {
     const respone = await http.get('/category', {})
-    setCategory(respone.data.data)
+    setDataSource(respone.data.data)
   }
 
   const handleAdd = async (value: CategoryForm) => {
@@ -83,7 +85,13 @@ function Category() {
     onChange: (keys: React.Key[]) => setSelectKeys(keys)
   } : undefined
 
-
+  const edit = {
+    title: '操作',
+    key: 'action',
+    render: (_: any, record: CategoryForm) => {
+      return (<Button onClick={(e) => { e.stopPropagation(); openEdit(record) }}>編輯</Button>)
+    }
+  }
   const columns = [
     {
       title: '類別名稱',
@@ -105,13 +113,7 @@ function Category() {
       dataIndex: 'updateTime',
       key: 'updateTime'
     },
-    {
-      title: '操作',
-      key: 'action',
-      render: (_: any, record: CategoryForm) => {
-        return (<Button onClick={(e) => { e.stopPropagation(); openEdit(record) }}>編輯</Button>)
-      }
-    }
+    edit
   ];
 
   return (
@@ -123,7 +125,7 @@ function Category() {
         <Button type='default' onClick={() => setdeleteModal(true)} disabled={selectKeys.length === 0} style={{ marginBottom: 16 }} icon={<DeleteOutlined />} danger> 刪除</Button>
       </Space>
 
-      <Table rowKey="id" dataSource={category} columns={columns} pagination={{ position: ['bottomCenter'] }} rowSelection={rowSelection} />
+      <Table rowKey="id" dataSource={dataSource} columns={columns} pagination={{ position: ['bottomCenter'] }} rowSelection={rowSelection} />
       <DeleteModal open={deleteModal} selectCount={selectKeys.length} onOk={handleDelete} onCancel={() => setdeleteModal(false)} loading={deleteLoading} />
       <AddCategoryModal open={open} loading={modalLoading} record={currentRecord} onOk={handleAdd} onCancel={() => setOpen(false)} />
     </div>

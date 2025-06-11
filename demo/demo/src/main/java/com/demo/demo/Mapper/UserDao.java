@@ -3,6 +3,8 @@ package com.demo.demo.Mapper;
 
 
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -23,6 +25,9 @@ public interface UserDao {
 
     @Update("update `user` set password = #{newPwd},update_time=now() where id= #{id}")
     public void updatePwd(String newPwd,Integer id);
+
+    @Select("select username,email,create_time,update_time from `user`")
+    public ArrayList<User> getAllUserInfo();
 
     
 }

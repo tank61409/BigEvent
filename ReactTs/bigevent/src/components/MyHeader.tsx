@@ -1,5 +1,5 @@
 import { Button, theme } from "antd";
-import {Layout} from "antd";
+import { Layout } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const { Header } = Layout
@@ -19,8 +19,8 @@ function MyHeader() {
         }
     }
     return (
-        <Header style={{    display:'flex', padding: 0, background: colorBgContainer, justifyContent:"flex-end",alignItems:'center' }}>
-            <Button type={token?'default':"primary"} onClick={handleClick}>{token?'登出':'登入'}</Button>
+        <Header style={{ display: 'flex', padding: 0, background: colorBgContainer, justifyContent: "flex-end", alignItems: 'center' }}>
+            <Button type={token ? 'default' : "primary"} onClick={handleClick}>{token ? '登出' : '登入'}</Button>
         </Header>
     )
 }

@@ -96,4 +96,8 @@ public class UserService {
         return str == null || str.trim().isEmpty();
     }
 
+    public Result getAllUserInfo() {
+       return Result.success(userDao.getAllUserInfo());
+    }
+
 }
