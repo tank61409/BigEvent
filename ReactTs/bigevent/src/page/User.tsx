@@ -1,5 +1,5 @@
 import { Button, Input, Space, Table } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import http from "../utils/axiosUtils";
 
 
@@ -33,7 +33,9 @@ const User = () => {
     console.log(respone.data.data)
     setDataSource(respone.data.data)
   }
-
+  useEffect(() => {
+    fetchdata()
+   })
   return (
     <div>
       <div style={{ background: 'white', width: '100%', borderRadius: '10px', height: 50, display: 'flex', padding: 16, alignItems: 'center' }}>
@@ -41,7 +43,7 @@ const User = () => {
           <span >Search user: </span>
           <Input />
         </Space>
-        <Button style={{ marginLeft: 'auto'}} onClick={fetchdata}>Refresh</Button>
+        <Button style={{ marginLeft: 'auto' }} onClick={fetchdata}>Refresh</Button>
       </div>
 
       <div style={{ marginTop: 16 }}>
