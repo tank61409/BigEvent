@@ -1,11 +1,9 @@
 package com.demo.demo.Intercepter;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.demo.demo.helper.JWTHelper;
 import com.demo.demo.helper.ThreadHelper;

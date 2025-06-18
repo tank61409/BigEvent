@@ -7,3 +7,10 @@ export interface homeData {
     ids:string[],
     userId:string
 }
+
+export interface user{
+    username:string,
+    email?:string,
+    createTime:string,
+    updateTime:string
+}
