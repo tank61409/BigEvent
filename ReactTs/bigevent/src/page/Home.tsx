@@ -2,6 +2,7 @@ import { Button, Card, Col, Layout, Row, Space, theme, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import MySider from '../components/MySider';
 import http from '../utils/axiosUtils';
+import AddUserModal from '../components/AddUserModal';
 
 
 
@@ -10,6 +11,7 @@ const Home: React.FC = () => {
   const [userCount, setUserCount] = useState('');
   const [categoryCount, setCategoryCount] = useState('');
   const [isAsync, setIsAsync] = useState(false);
+  const [addUserModal, setaddUserModal] = useState(false);
   const { Content } = Layout;
 
   const fetchHomeData = async () => {
@@ -23,7 +25,8 @@ const Home: React.FC = () => {
     fetchHomeData();
   }, [])
   const addUser = async () => {
-    const respone = await http.post('/user/register');
+    setaddUserModal(true)
+    console.log(addUserModal)
     fetchHomeData();
   }
   return (
@@ -63,7 +66,7 @@ const Home: React.FC = () => {
             <Col span={9}>
               <Card title={<span style={{ fontSize: '22px', fontWeight: 'bold' }}>Quick Action</span>} variant='borderless' style={{ width: '100%', height: 239 }}>
                 <Space direction='vertical' style={{ width: '100%' }} >
-                  <Button style={{ gap: '16px', fontSize: '16px', height: 40 }} block>Add User</Button>
+                  <Button style={{ gap: '16px', fontSize: '16px', height: 40 }} onClick={addUser} block>Add User</Button>
                   <Button style={{ gap: '16px', fontSize: '16px', height: 40 }} block>ManageCategories</Button>
                   <Button style={{ gap: '16px', fontSize: '16px', height: 40 }} block>View Item</Button>
                 </Space>
@@ -72,6 +75,7 @@ const Home: React.FC = () => {
           </Row>
 
         </Content>
+        
       </Layout>
     </Layout>
   );

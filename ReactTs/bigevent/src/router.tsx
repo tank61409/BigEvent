@@ -9,7 +9,7 @@ import User from "./page/User";
 const RouteerConfig = () => {
     return (
         <Routes>
-            <Route path="/" element={<Navigate to='/home' replace />} />
+            <Route path="/" element={<Navigate to='/login' replace />} />
 
             <Route path="/login" element={<Login />} />
             {/* 巢狀驗證 */}
