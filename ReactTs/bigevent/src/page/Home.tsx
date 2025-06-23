@@ -32,7 +32,7 @@ const Home: React.FC = () => {
       <MySider />
       <Layout>
         <Content style={{ margin: '0 16px' }}>
-          <Typography.Title level={2} style={{ marginBottom: 24, color: '#2c2c2c' }}>Welcome,Admin!</Typography.Title>
+          <Typography.Title level={2} style={{ marginBottom: 24, color: '#2c2c2c' }}>{'Welcome,Admin!'}</Typography.Title>
           <Row gutter={16} >
             <Col span={15}>
               <Card title={<span style={{ fontSize: '22px', fontWeight: 'bold' }}>Dashboard</span>} variant='borderless' loading={isAsync}>

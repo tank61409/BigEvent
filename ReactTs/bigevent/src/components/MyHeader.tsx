@@ -6,7 +6,7 @@ const { Header } = Layout
 
 function MyHeader() {
     const {
-        token: { colorBgContainer, borderRadiusLG },
+        token: { colorBgContainer },
     } = theme.useToken();
     const navigate = useNavigate()
     const token = localStorage.getItem('token')

@@ -1,11 +1,15 @@
 package com.demo.demo.Intercepter;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.demo.demo.Model.Log;
 import com.demo.demo.helper.JWTHelper;
+import com.demo.demo.helper.LogHelper;
 import com.demo.demo.helper.ThreadHelper;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,9 +26,9 @@ public class LoginIntercepter implements HandlerInterceptor {
             if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
                 return true;
             }
-            if(token == null ||!token.startsWith("Bearer ")){
-                 response.setStatus(401);
-                 return false;
+            if (token == null || !token.startsWith("Bearer ")) {
+                response.setStatus(401);
+                return false;
             }
             token = token.substring(7);
             HashMap<String, Object> claims = new HashMap<>(JWTHelper.parseToken(token));
@@ -32,7 +36,7 @@ public class LoginIntercepter implements HandlerInterceptor {
             return true;
         } catch (Exception e) {
             response.setStatus(401);
-            
+
             return false;
         }
     }
