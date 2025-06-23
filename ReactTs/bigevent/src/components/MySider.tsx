@@ -27,7 +27,7 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Home', '/', <HomeOutlined />),
+  getItem('Home', '/home', <HomeOutlined />),
   getItem('Category', '/category', <DatabaseOutlined />),
   getItem('User', '/user', <UserOutlined />  ),
   getItem('Setting', '9 ', <SettingOutlined />),

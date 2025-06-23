@@ -1,4 +1,3 @@
-import { JSX } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 const RequireAuth = () => { 

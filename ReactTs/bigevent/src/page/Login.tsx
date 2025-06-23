@@ -1,4 +1,3 @@
-import { SyncOutlined } from '@ant-design/icons';
 import { Alert, Button, Checkbox, Col, Form, Input, Layout, Row } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import axios from 'axios';

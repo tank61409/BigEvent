@@ -24,10 +24,8 @@ const Home: React.FC = () => {
     setIsAsync(true);
     fetchHomeData();
   }, [])
-  const addUser = async () => {
+  const addUser = () => {
     setaddUserModal(true)
-    console.log(addUserModal)
-    fetchHomeData();
   }
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -73,9 +71,9 @@ const Home: React.FC = () => {
               </Card>
             </Col>
           </Row>
-
+          <AddUserModal open={addUserModal} onCancel={()=>{setaddUserModal(false)}}/>
         </Content>
-        
+
       </Layout>
     </Layout>
   );
