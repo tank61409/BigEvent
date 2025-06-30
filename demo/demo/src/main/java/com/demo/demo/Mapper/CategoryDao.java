@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.demo.demo.Model.Category;
-import com.demo.demo.Model.Ids;
 
 @Mapper
 public interface CategoryDao {

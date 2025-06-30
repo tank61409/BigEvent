@@ -1,15 +1,11 @@
 package com.demo.demo.Intercepter;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import com.demo.demo.Model.Log;
 import com.demo.demo.helper.JWTHelper;
-import com.demo.demo.helper.LogHelper;
 import com.demo.demo.helper.ThreadHelper;
 
 import jakarta.servlet.http.HttpServletRequest;
