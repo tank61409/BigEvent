@@ -30,6 +30,7 @@ const items: MenuItem[] = [
   getItem('Home', '/home', <HomeOutlined />),
   getItem('Category', '/category', <DatabaseOutlined />),
   getItem('User', '/user', <UserOutlined />  ),
+  getItem('Post', '/post', <FileOutlined />),
   // getItem('Setting', '9 ', <SettingOutlined />),
 ];
 
@@ -39,7 +40,7 @@ function MySider() {
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
       <div className="demo-logo-vertical" />
-      <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={({ key }) => {
+      <Menu theme="dark" defaultSelectedKeys={[window.location.pathname]} mode="inline" items={items} onClick={({ key }) => {
         navigate(key)
       }} />
     </Sider>

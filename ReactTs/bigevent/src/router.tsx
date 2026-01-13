@@ -5,6 +5,7 @@ import RequireAuth from "./components/RequireAuth";
 import Home from "./page/Home";
 import MyLayout from "./components/MyLayout";
 import User from "./page/User";
+import Post from "./page/Post";
 
 const RouteerConfig = () => {
     return (
@@ -18,6 +19,7 @@ const RouteerConfig = () => {
                 <Route element={<MyLayout />}>
                     <Route path="/category" element={<Category />} />
                     <Route path="/user" element={<User />} />
+                    <Route path="/post" element={<Post />} />
                 </Route>
             </Route>
 
