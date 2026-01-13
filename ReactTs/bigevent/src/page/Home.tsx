@@ -16,9 +16,11 @@ const Home: React.FC = () => {
 
   const fetchHomeData = async () => {
     const respone = await http.post('/admin/fetchdata', homedata);
-    setUserCount(respone.data.data[0]);
-    setCategoryCount(respone.data.data[1])
+    console.log(respone.data)
+    setUserCount(respone.data.data[0] ?? 0);
+    setCategoryCount(respone.data.data[1] ?? 0);
     setIsAsync(false);
+    
   }
   useEffect(() => {
     setIsAsync(true);
@@ -71,7 +73,7 @@ const Home: React.FC = () => {
               </Card>
             </Col>
           </Row>
-          <AddUserModal open={addUserModal} onCancel={()=>{setaddUserModal(false)}}/>
+          <AddUserModal open={addUserModal} onCancel={() => { setaddUserModal(false) }} />
         </Content>
 
       </Layout>

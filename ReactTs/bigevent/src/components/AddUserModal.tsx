@@ -1,6 +1,7 @@
 import { Form, Input, Modal } from "antd";
 import axios from "axios";
 import { AddUser } from "../interface/userInterface";
+import http from "../utils/axiosUtils";
 
 interface Props {
     open: boolean;
@@ -18,7 +19,7 @@ function AddUserModal(props: Props) {
 
     const handleOk = async () => {
         const value: AddUser = await form.validateFields();
-        await axios.post("https://bigevent-production.up.railway.app/user/register", value);
+        await http.post("/user/register", value);
         console.log("新增成功")
         onCancel();
     }

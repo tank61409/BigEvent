@@ -19,7 +19,7 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public Result register(String username, String password) {
+    public Result register(String username, String password,String email) {
 
         if (!username.matches("^[A-Za-z0-9]{5,16}$")) {
             throw new IllegalArgumentException("只能輸入英文字母");
@@ -30,7 +30,7 @@ public class UserService {
         }
 
         if (userDao.findByName(username) == null) {
-            userDao.add(username, password);
+            userDao.add(username, password,email);
             return Result.success();
         } else {
             return Result.error("帳戶名已存在");

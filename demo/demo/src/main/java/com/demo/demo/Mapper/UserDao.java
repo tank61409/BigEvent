@@ -17,8 +17,8 @@ public interface UserDao {
     @Select("select * from user where username = #{username}")
     public User findByName(String username);
 
-    @Insert("insert into user(username,password,create_time,update_time) value(#{username},#{password},now(),now())")
-    public void add(String username, String password);
+    @Insert("insert into user(username,password,email,create_time,update_time) value(#{username},#{password},#{email},now(),now())")
+    public void add(String username, String password,String email);
 
     @Update("update `user` set nickname = #{nickname},email=#{email},update_time=#{updateTime} where id = #{id}")
     public void update(User user);

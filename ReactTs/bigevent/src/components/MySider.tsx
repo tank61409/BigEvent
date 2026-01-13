@@ -30,7 +30,7 @@ const items: MenuItem[] = [
   getItem('Home', '/home', <HomeOutlined />),
   getItem('Category', '/category', <DatabaseOutlined />),
   getItem('User', '/user', <UserOutlined />  ),
-  getItem('Setting', '9 ', <SettingOutlined />),
+  // getItem('Setting', '9 ', <SettingOutlined />),
 ];
 
 function MySider() {
